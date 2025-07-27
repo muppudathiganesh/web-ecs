@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Manage Products</h2>
+
+<!-- Add Product Button -->
+<p><a href="{{ url_for('main.add_product') }}">➕ Add Product</a></p>
+
+<!-- Products List -->
+<ul>
+    {% for product in products %}
+        <li>
+            <strong>{{ product.name }}</strong> - ₹{{ product.price }} <br>
+            Stock: {{ product.stock }} <br>
+            <a href="{{ url_for('main.edit_product', product_id=product.id) }}">✏️ Edit</a> |
+            <a href="{{ url_for('main.delete_product', product_id=product.id) }}" 
+               onclick="return confirm('Are you sure you want to delete this product?');">🗑 Delete</a>
+        </li>
+    {% else %}
+        <li>No products found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
